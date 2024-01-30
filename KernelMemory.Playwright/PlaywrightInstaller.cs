@@ -20,12 +20,12 @@ internal static class PlaywrightInstaller
 
         return taskCompletionSource.Task;
     }
-    
+
     public static Task<bool> InstallChrome()
     {
         return InstallInternal("install chrome");
     }
-    
+
     public static Task<bool> Install()
     {
         return InstallInternal("install");
