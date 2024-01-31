@@ -114,7 +114,7 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
     }
     
     public static async Task<string> GetWebPageContentAsTextAsync(
-        IKernelMemory memory, 
+        this IKernelMemory memory, 
         string url, 
         BrowserTypeLaunchOptions? browserTypeLaunchOptions = default, 
         BrowserNewContextOptions? browserNewContextOptions = default,

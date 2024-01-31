@@ -17,8 +17,8 @@
         <RepositoryUrl>https://github.com/managedcode/KernelMemory.Playwright</RepositoryUrl>
         <PackageProjectUrl>https://github.com/managedcode/KernelMemory.Playwright</PackageProjectUrl>
         <Product>Managed Code - KernelMemory.Playwright</Product>
-        <Version>1.0.1</Version>
-        <PackageVersion>1.0.1</PackageVersion>
+        <Version>1.0.2</Version>
+        <PackageVersion>1.0.2</PackageVersion>
 
     </PropertyGroup>
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">

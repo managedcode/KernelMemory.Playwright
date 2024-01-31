@@ -102,7 +102,7 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
     }
     
     public static async Task<byte[]> GetWebPageContentAsImageAsync(
-        IKernelMemory memory, 
+        this IKernelMemory memory, 
         string url, 
         BrowserTypeLaunchOptions? browserTypeLaunchOptions = default, 
         BrowserNewContextOptions? browserNewContextOptions = default,
