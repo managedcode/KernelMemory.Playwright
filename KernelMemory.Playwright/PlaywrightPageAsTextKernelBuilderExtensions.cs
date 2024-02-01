@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.KernelMemory;
@@ -70,9 +72,20 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
         CancellationToken cancellationToken = default)
     {
         var text = await GetWebPageAsTextAsync(browserContext, url, cancellationToken).ConfigureAwait(false);
-
-        return await memory.ImportTextAsync(text, documentId, tags, index, steps, cancellationToken).ConfigureAwait(false);
+        var content = new MemoryStream(Encoding.UTF8.GetBytes(text));
+        
+        return await memory.ImportDocumentAsync(
+                content,
+                fileName: url,
+                documentId: documentId,
+                tags,
+                index: index,
+                steps: steps,
+                cancellationToken)
+            .ConfigureAwait(false);
     }
+    
+    
 
     private static async Task<string> GetWebPageAsTextAsync(IBrowserContext browserContext, string url, CancellationToken cancellationToken = default)
     {

@@ -12,7 +12,6 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
     public static async Task<string> ImportWebPageAsImageWithPlaywrightAsync(
         this IKernelMemory memory, 
         string url, 
-        string? fileName = null,
         string? documentId = null, 
         TagCollection? tags = null, 
         string? index = null, 
@@ -28,14 +27,13 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
 
         await using var context = await browser.NewContextAsync(browserNewContextOptions).ConfigureAwait(false);
 
-        return await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, fileName, documentId, tags, index, steps, cancellationToken)
+        return await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, documentId, tags, index, steps, cancellationToken)
             .ConfigureAwait(false);
     }
 
     public static async Task<string[]> ImportWebPageAsImageWithPlaywrightAsync(
         this IKernelMemory memory, 
         string[] urls, 
-        string? fileName = null,
         string? documentId = null, 
         TagCollection? tags = null, 
         string? index = null, 
@@ -55,7 +53,7 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
 
         foreach (var url in urls)
         {
-            var result = await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, fileName, documentId, tags, index, steps,
+            var result = await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, documentId, tags, index, steps,
                 cancellationToken).ConfigureAwait(false);
 
             results.Add(result);
@@ -65,14 +63,14 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
     }
 
     private static async Task<string> ImportWebPageWithPlaywrightInternalAsync(IKernelMemory memory, IBrowserContext browserContext, string url,
-        PageScreenshotOptions? pageScreenshotOptions, string? fileName = null, string? documentId = null, TagCollection? tags = null, string? index = null, IEnumerable<string>? steps = null,
+        PageScreenshotOptions? pageScreenshotOptions,  string? documentId = null, TagCollection? tags = null, string? index = null, IEnumerable<string>? steps = null,
         CancellationToken cancellationToken = default)
     {
         var text = await GetWebPageAsImageAsync(browserContext, url, pageScreenshotOptions, cancellationToken).ConfigureAwait(false);
 
         var stream = new MemoryStream(text);
 
-        return await memory.ImportDocumentAsync(stream, fileName, documentId, tags, index, steps, cancellationToken).ConfigureAwait(false);
+        return await memory.ImportDocumentAsync(stream, url, documentId, tags, index, steps, cancellationToken).ConfigureAwait(false);
     }
 
 
