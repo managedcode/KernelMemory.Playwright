@@ -9,7 +9,17 @@ KernelMemory.Playwright is an open-source project that provides methods to impor
 
 ## How to Use
 
+
+
 1. Install the package into your project.
+
+You can install the `ManagedCode.KernelMemory.Playwright` NuGet package by running the following command in your terminal:
+
+```bash
+dotnet add package ManagedCode.KernelMemory.Playwright
+```
+
+Add Playwright to your services. 
 ```csharp
 services.WithPlaywright();
 ```
