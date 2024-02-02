@@ -30,7 +30,7 @@ public class PlaywrightTests
         // Get the clear text of the page
         var clearText = await page.InnerTextAsync("body");
 
-        clearText.Should().BeNullOrEmpty();
+        clearText.Should().NotBeEmpty();
     }
     
     [Fact]
