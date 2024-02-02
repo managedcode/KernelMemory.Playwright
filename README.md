@@ -2,6 +2,8 @@
 
 KernelMemory.Playwright is an open-source project that provides methods to import websites as text or images into memory. It leverages the power of the Playwright library to interact with web pages programmatically.
 
+[![NuGet Package](https://img.shields.io/nuget/v/ManagedCode.KernelMemory.Playwright.svg)](https://www.nuget.org/packages/ManagedCode.KernelMemory.Playwright)
+
 ## Features
 
 - Import web pages as text: This feature allows you to fetch the entire text content of a web page and store it in memory.
