@@ -100,7 +100,7 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
         
         return await memory.ImportDocumentAsync(
                 content,
-                fileName: url,
+                fileName: url+"@.txt",
                 documentId: documentId,
                 tags,
                 index: index,
@@ -118,7 +118,7 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
         try
         {
             await page.GotoAsync(url)
-                .ConfigureAwait(false);;
+                .ConfigureAwait(false);
             
             cancellationToken.ThrowIfCancellationRequested();
             
