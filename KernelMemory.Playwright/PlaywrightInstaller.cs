@@ -4,7 +4,7 @@ using Microsoft.Playwright;
 
 namespace KernelMemory.Playwright;
 
-internal static class PlaywrightInstaller
+public static class PlaywrightInstaller
 {
     private static Task<bool> InstallInternal(string command)
     {
@@ -14,13 +14,19 @@ internal static class PlaywrightInstaller
             var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger(nameof(PlaywrightInstaller));
             logger.LogInformation("Installing Playwright...");
             var exitCode = Program.Main(new[] { command });
-            taskCompletionSource.SetResult(exitCode == 0);
-            logger.LogInformation("Playwright installed; Status: {ExitCode}", exitCode == 0);
+
+            IsInstalled = exitCode == 0;
+            logger.LogInformation("Playwright installed; Status: {IsInstalled}", IsInstalled);
+            
+            taskCompletionSource.SetResult(IsInstalled);
+
         }, TaskCreationOptions.LongRunning);
 
         return taskCompletionSource.Task;
     }
 
+    public static bool IsInstalled { get; private set; }
+    
     public static Task<bool> InstallChrome()
     {
         return InstallInternal("install chrome");
