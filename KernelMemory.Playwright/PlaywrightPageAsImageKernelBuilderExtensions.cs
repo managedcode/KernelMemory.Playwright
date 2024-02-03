@@ -87,13 +87,13 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
         PageScreenshotOptions? pageScreenshotOptions,  string? documentId = null, TagCollection? tags = null, string? index = null, IEnumerable<string>? steps = null,
         CancellationToken cancellationToken = default)
     {
-        var text = await GetWebPageAsImageAsync(browserContext, url, pageScreenshotOptions, cancellationToken)
+        var image = await GetWebPageAsImageAsync(browserContext, url, pageScreenshotOptions, cancellationToken)
             .ConfigureAwait(false);
         
         cancellationToken.ThrowIfCancellationRequested();
         
-        using var stream = new MemoryStream(text);
-        return await memory.ImportDocumentAsync(stream, url, documentId, tags, index, steps, cancellationToken)
+        using var stream = new MemoryStream(image);
+        return await memory.ImportDocumentAsync(stream, url+"@.jpg", documentId, tags, index, steps, cancellationToken)
             .ConfigureAwait(false);
     }
 
