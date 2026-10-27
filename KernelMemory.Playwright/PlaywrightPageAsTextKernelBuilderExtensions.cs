@@ -36,7 +36,7 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
 
         cancellationToken.ThrowIfCancellationRequested();
         
-        return await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, documentId, tags, index, steps, cancellationToken)
+        return await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, documentId, tags, index, steps, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
     }
 
@@ -72,7 +72,7 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
         {
             cancellationToken.ThrowIfCancellationRequested();
             
-            var result = await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, documentId, tags, index, steps, cancellationToken)
+            var result = await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, documentId, tags, index, steps, cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
 
             results.Add(result);
@@ -105,7 +105,7 @@ public static class PlaywrightPageAsTextKernelBuilderExtensions
                 tags,
                 index: index,
                 steps: steps,
-                cancellationToken)
+                cancellationToken: cancellationToken)
             .ConfigureAwait(false);
     }
     

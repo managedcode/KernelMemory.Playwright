@@ -36,7 +36,7 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
         
         cancellationToken.ThrowIfCancellationRequested();
 
-        return await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, documentId, tags, index, steps, cancellationToken)
+        return await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, documentId, tags, index, steps, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
     }
 
@@ -74,7 +74,7 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
             cancellationToken.ThrowIfCancellationRequested();
             
             var result = await ImportWebPageWithPlaywrightInternalAsync(memory, context, url, pageScreenshotOptions, documentId, tags, index, steps,
-                cancellationToken)
+                cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
 
             results.Add(result);
@@ -93,7 +93,7 @@ public static class PlaywrightPageAsImageKernelBuilderExtensions
         cancellationToken.ThrowIfCancellationRequested();
         
         using var stream = new MemoryStream(image);
-        return await memory.ImportDocumentAsync(stream, url+"@.jpg", documentId, tags, index, steps, cancellationToken)
+        return await memory.ImportDocumentAsync(stream, url+"@.jpg", documentId, tags, index, steps, cancellationToken: cancellationToken)
             .ConfigureAwait(false);
     }
 
